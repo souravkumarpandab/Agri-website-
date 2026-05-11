@@ -1,0 +1,77 @@
+==============================================================
+AgriSahayak - Final Year Presentation (PPT) Content Outline
+==============================================================
+Note: You can find the corresponding images for these slides in the `d:\4th year\Agri_Assistant\Final_Report\` folder.
+
+[ Slide 1: Title Slide ]
+- Title: AgriSahayak - AI-Powered Agricultural Assistant
+- Subtitle: Final Year Project Presentation
+- Details: [Your Name] | [Your Guide's Name] | [Your Institution]
+- Image Idea: Use `home.png` as a faded background.
+
+[ Slide 2: Problem Statement ]
+- Unpredictable weather & climate changes disrupting farming.
+- Lack of real-time market price awareness leading to middleman exploitation.
+- Soil degradation due to improper crop selection and fertilizer usage.
+- Information gap regarding government subsidies and modern techniques.
+
+[ Slide 3: Proposed Solution ]
+- Concept: A centralized, intelligent web application tailored for farmers.
+- Key Offerings:
+  * AI Agronomist (24/7 assistance).
+  * Live Market & Weather tracking.
+  * Real-time IoT Dashboard simulation.
+  * Crop Prediction Engine.
+
+[ Slide 4: System Architecture & Tech Stack ]
+- Visual: [Insert Mermaid System Architecture diagram from the report]
+- Tech Stack: 
+  * Frontend: React.js, Vite, pure Vanilla CSS.
+  * Backend: Node.js, Express.
+  * Database: MongoDB.
+  * AI: Google Gemini 2.5 Flash-Lite API.
+
+[ Slide 5: Smart Dashboard & IoT Simulation ]
+- Visual: Add `dashboard.png` here.
+- Talking Points: 
+  * Central command center for farmers.
+  * Real-time simulated NPK (Nitrogen, Phosphorus, Potassium) and soil moisture metrics.
+  * Smart equipment status tracking. 
+  * Enterprise-grade UI with glassmorphism.
+
+[ Slide 6: AI Chatbot & Crop Recommendation ]
+- Visual: Add `crop.png` here.
+- Talking Points: 
+  * "Kisan Mitra" - 24/7 AI Agronomist.
+  * Takes precise NPK and weather parameters to recommend the most profitable crop.
+  * Provides detailed growing strategies powered by Gemini AI.
+
+[ Slide 7: Market Insights & Weather Forecasting ]
+- Visual: Add `market.png` and `weather.png` here.
+- Talking Points: 
+  * Live tracking of 28+ commodities to ensure fair pricing.
+  * Real-time weather data for operational planning (harvesting, pesticide application).
+
+[ Slide 8: Resource Center & Digital Farming ]
+- Talking Points: 
+  * Educating farmers is crucial for adoption.
+  * Directory of Government Schemes (PM-Kisan, Soil Health Card).
+  * Modules on Organic farming tips.
+  * Drone Store concept for modern agricultural equipment.
+
+[ Slide 9: Technical Challenges & Solutions ]
+- Challenge: AI API rate limits and connection crashes.
+  Solution: Engineered an exponential backoff and retry logic in Node.js.
+- Challenge: Achieving premium, responsive UI.
+  Solution: Built a custom, CSS variable-driven design system.
+- Challenge: Session drops during navigation.
+  Solution: Implemented robust sessionStorage architecture.
+
+[ Slide 10: Future Enhancements & Conclusion ]
+- Future Scope: 
+  * Physical IoT sensor (Arduino/Raspberry Pi) integration.
+  * Vernacular Voice AI (Speech-to-Text).
+  * Mobile App release.
+- Conclusion: AgriSahayak empowers Indian agriculture through accessible, robust technology.
+- End: "Thank You. Any Questions?"
+==============================================================
