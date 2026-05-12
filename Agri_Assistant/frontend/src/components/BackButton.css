@@ -1,0 +1,31 @@
+.floating-back-btn {
+  position: fixed;
+  top: 25px;
+  left: 25px;
+  background: var(--primary, #2e7d32);
+  color: #ffffff;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+
+.floating-back-btn i {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .floating-back-btn {
+    top: 15px;
+    left: 15px;
+    width: 28px;
+    height: 28px;
+  }
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Live Mandi Prices – Odisha & India</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f6f4;
+            padding: 15px;
+        }
+        
+        h2 {
+            text-align: center;
+            color: #2e7d32
+        }
+        
+        .card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        
+        select,
+        input,
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #1b5e20
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th,
+        td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .note {
+            font-size: 12px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>🌾 Mandi Price Comparison System</h2>
+
+    <div class="card">
+        <label>Select Crop</label>
+        <select id="crop">
+        <option>Onion</option>
+        <option>Potato</option>
+        <option>Rice</option>
+        <option>Wheat</option>
+        <option>Maize</option>
+    </select>
+
+        <label>Select Odisha District</label>
+        <select id="district">
+        <option>Angul</option><option>Balasore</option><option>Bargarh</option>
+        <option>Bhadrak</option><option>Bolangir</option><option>Cuttack</option>
+        <option>Dhenkanal</option><option>Ganjam</option><option>Jagatsinghpur</option>
+        <option>Jajpur</option><option>Jharsuguda</option><option>Kalahandi</option>
+        <option>Kendrapara</option><option>Keonjhar</option><option>Khordha</option>
+        <option>Koraput</option><option>Malkangiri</option><option>Mayurbhanj</option>
+        <option>Nabarangpur</option><option>Nayagarh</option><option>Nuapada</option>
+        <option>Puri</option><option>Rayagada</option><option>Sambalpur</option>
+        <option>Sonepur</option><option>Sundargarh</option>
+    </select>
+
+        <button onclick="showPrices()">Show Prices</button>
+    </div>
+
+    <div class="card" id="priceCard" style="display:none">
+        <h3>📊 Price Comparison (₹ / Quintal)</h3>
+        <table>
+            <tr>
+                <th>Market</th>
+                <th>Min</th>
+                <th>Max</th>
+                <th>Average</th>
+            </tr>
+            <tr>
+                <td>Odisha Mandi</td>
+                <td id="odMin"></td>
+                <td id="odMax"></td>
+                <td id="odAvg"></td>
+            </tr>
+            <tr>
+                <td>All India Avg</td>
+                <td id="inMin"></td>
+                <td id="inMax"></td>
+                <td id="inAvg"></td>
+            </tr>
+            <tr>
+                <td>International (Export)</td>
+                <td id="exMin"></td>
+                <td id="exMax"></td>
+                <td id="exAvg"></td>
+            </tr>
+        </table>
+        <p class="note">*Prices shown are reference values for demo. Real prices vary daily.</p>
+    </div>
+
+    <div class="card">
+        <h3>🚚 Transport Cost Calculator</h3>
+
+        <label>Distance to Mandi (km)</label>
+        <input id="distance" type="number" placeholder="e.g. 120">
+
+        <label>Diesel Price (₹/L)</label>
+        <input id="diesel" type="number" value="92">
+
+        <label>Vehicle Mileage (km/L)</label>
+        <input id="kmpl" type="number" value="4">
+
+        <label>Load (Quintals)</label>
+        <input id="load" type="number" value="10">
+
+        <button onclick="calcTransport()">Calculate Cost</button>
+
+        <p id="transportResult"></p>
+    </div>
+
+    <script>
+        function showPrices() {
+            document.getElementById("priceCard").style.display = "block";
+
+            // demo reference data
+            let odMin = 1800,
+                odMax = 2400;
+            let inMin = 2000,
+                inMax = 2800;
+            let exMin = 3000,
+                exMax = 3600;
+
+            document.getElementById("odMin").innerText = odMin;
+            document.getElementById("odMax").innerText = odMax;
+            document.getElementById("odAvg").innerText = (odMin + odMax) / 2;
+
+            document.getElementById("inMin").innerText = inMin;
+            document.getElementById("inMax").innerText = inMax;
+            document.getElementById("inAvg").innerText = (inMin + inMax) / 2;
+
+            document.getElementById("exMin").innerText = exMin;
+            document.getElementById("exMax").innerText = exMax;
+            document.getElementById("exAvg").innerText = (exMin + exMax) / 2;
+        }
+
+        function calcTransport() {
+            let dist = document.getElementById("distance").value;
+            let diesel = document.getElementById("diesel").value;
+            let kmpl = document.getElementById("kmpl").value;
+            let load = document.getElementById("load").value;
+
+            let litres = (dist * 2) / kmpl;
+            let cost = litres * diesel;
+            let perQtl = (cost / load).toFixed(2);
+
+            document.getElementById("transportResult").innerHTML =
+                `Total Diesel Cost: ₹${cost.toFixed(2)}<br>
+         Transport Cost per Quintal: ₹${perQtl}`;
+        }
+    </script>
+
+</body>
+
+</html>

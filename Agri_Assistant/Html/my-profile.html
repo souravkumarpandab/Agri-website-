@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - AgriSahayak</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f7f6;
+            padding: 40px;
+        }
+        
+        .profile-card {
+            width: 450px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2e7d32;
+        }
+        
+        .profile-row {
+            margin-bottom: 15px;
+        }
+        
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .value {
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        #userPhoto {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: auto;
+            display: block;
+            border: 3px solid #2e7d32;
+        }
+        
+        .form-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #eef6ee;
+            border-radius: 12px;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        
+        button {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+        /* Progress Bar */
+        
+        .progress-container {
+            width: 100%;
+            background: #ddd;
+            height: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 15px;
+            width: 0%;
+            background: #2e7d32;
+            border-radius: 8px;
+        }
+        /* Slider Button */
+        
+        .slider-container {
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .slider-label {
+            font-size: 0.9rem;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 45px;
+            background: #c8e6c9;
+            border-radius: 30px;
+            margin: 10px auto;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .slider-thumb {
+            width: 45px;
+            height: 45px;
+            background: #2e7d32;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: 0.4s ease;
+        }
+        
+        .slider.active .slider-thumb {
+            left: calc(100% - 45px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-card">
+        <h2>My Profile</h2>
+
+        <img id="userPhoto" src="" alt="User Photo">
+
+        <div class="profile-row">
+            <div class="label">Full Name:</div>
+            <div class="value" id="pName"></div>
+        </div>
+        <div class="profile-row">
+            <div class="label">Email:</div>
+            <div class="value" id="pEmail"></div>
+        </div>
+
+        <hr>
+
+        <div class="form-box">
+            <h3>Update Farming Details</h3>
+
+            <input type="text" id="address" placeholder="Address">
+            <input type="number" id="mobile" placeholder="Mobile Number" maxlength="10" oninput="validateMobile(this)">
+            <input type="number" id="age" placeholder="Age">
+
+            <select id="qualification">
+                <option value="">Select Qualification</option>
+                <option value="10th">10th</option>
+                <option value="12th">12th</option>
+                <option value="Graduate">Graduate</option>
+                <option value="Post Graduate">Post Graduate</option>
+            </select>
+
+            <select id="farmingType">
+                <option value="">Type of Farming</option>
+                <option value="Organic">Organic</option>
+                <option value="Natural">Natural</option>
+                <option value="Chemical">Chemical</option>
+            </select>
+
+            <select id="finance">
+                <option value="">Financial Condition</option>
+                <option value="Poor">Poor</option>
+                <option value="Stable">Stable</option>
+                <option value="Good">Good</option>
+                <option value="Very Good">Very Good</option>
+            </select>
+
+            <input type="file" id="photoInput" accept="image/*">
+
+            <button onclick="submitDetails()">Submit Details</button>
+
+            <div class="progress-container" id="progressBox">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <hr>
+
+        <h3>Your Updated Details</h3>
+        <p id="result"></p>
+
+        <!-- Back Slider -->
+        <div class="slider-container">
+            <span class="slider-label">Slide to Go Back</span>
+            <div class="slider" onclick="goDashboard()">
+                <div class="slider-thumb"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Load user info from login
+        const data = JSON.parse(localStorage.getItem("currentUser"));
+        if (!data) {
+            alert("Login first!");
+            window.location.href = "login.html";
+        }
+
+        document.getElementById("pName").innerText = data.fullName;
+        document.getElementById("pEmail").innerText = data.email;
+        document.getElementById("userPhoto").src =
+            `https://ui-avatars.com/api/?name=${data.fullName}&background=2e7d32&color=fff&size=128`;
+
+        // Validate 10-digit mobile
+        function validateMobile(input) {
+            if (input.value.length > 10) input.value = input.value.slice(0, 10);
+        }
+
+        // Handle form + progress
+        function submitDetails() {
+            let address = document.getElementById("address").value;
+            let mobile = document.getElementById("mobile").value;
+            let age = document.getElementById("age").value;
+            let qualification = document.getElementById("qualification").value;
+            let farmingType = document.getElementById("farmingType").value;
+            let finance = document.getElementById("finance").value;
+            let photoFile = document.getElementById("photoInput").files[0];
+
+            if (!address || !mobile || !age || !qualification || !farmingType || !finance) {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            const progressBox = document.getElementById("progressBox");
+            const progressBar = document.getElementById("progressBar");
+
+            progressBox.style.display = "block";
+            progressBar.style.width = "0%";
+
+            let progress = 0;
+            let loading = setInterval(() => {
+                        progress += 20;
+                        progressBar.style.width = progress + "%";
+
+                        if (progress >= 100) {
+                            clearInterval(loading);
+
+                            let imgURL = "";
+                            if (photoFile) imgURL = URL.createObjectURL(photoFile);
+
+                            document.getElementById("result").innerHTML = `
+                        <strong>Address:</strong> ${address}<br>
+                        <strong>Mobile:</strong> ${mobile}<br>
+                        <strong>Age:</strong> ${age}<br>
+                        <strong>Qualification:</strong> ${qualification}<br>
+                        <strong>Type of Farming:</strong> ${farmingType}<br>
+                        <strong>Financial Condition:</strong> ${finance}<br>
+                        ${imgURL ? `<br><img src="${imgURL}" width="120" style="border-radius:10px;">` : ""}
+                    `;
+                }
+            }, 200);
+        }
+
+        function goDashboard() {
+            document.querySelector(".slider").classList.add("active");
+
+            setTimeout(() => {
+                window.location.href = "dashboard.html";
+            }, 400);
+        }
+    </script>
+
+</body>
+
+</html>

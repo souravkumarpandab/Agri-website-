@@ -1,0 +1,262 @@
+/* --- LOGIN PAGE STYLES --- */
+.login-page {
+    background: linear-gradient(135deg, rgba(5, 26, 17, 0.8), rgba(16, 185, 129, 0.4)), url("/image/features-bg.jpeg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+/* --- BRAND LOGO (Top Right) --- */
+.brand-logo {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.brand-logo i {
+    color: #2e7d32;
+    font-size: 2rem;
+}
+
+/* --- HOME BUTTON (Top Left) --- */
+.back-home {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    text-decoration: none;
+    color: var(--primary);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(15px);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-home i {
+    font-size: 0.9rem;
+}
+
+.back-home:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(46, 125, 50, 0.4);
+}
+
+/* --- MAIN CONTAINER --- */
+.login-page .container {
+    background-color: rgba(18, 31, 23, 0.85); /* Deep green glass */
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    width: 450px;
+    max-width: 90%;
+    padding: 50px 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* --- FORMS --- */
+.form-container {
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-container form {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+.form-container h1 {
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+/* --- INPUT FIELDS STYLING --- */
+.input-group {
+    position: relative;
+    width: 100%;
+    margin: 6px 0;
+}
+
+.input-group input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #555;
+    padding: 10px 30px 10px 10px;
+    width: 100%;
+    color: #fff;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.input-group input:focus {
+    border-bottom: 1px solid #2e7d32;
+}
+
+.input-group .icon-left {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+    pointer-events: none;
+}
+
+.input-group .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #2e7d32;
+    cursor: pointer;
+    z-index: 10;
+}
+
+
+
+/* --- MAIN FORM BUTTONS (Login/Register) --- */
+button.btn-glow {
+    border-radius: 30px;
+    border: 1px solid rgba(16, 185, 129, 0.5);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.8), rgba(5, 150, 105, 0.9));
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 14px 60px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+button.btn-glow::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: rotate(45deg) translate(-50%, -50%);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+button.btn-glow:hover {
+    transform: translateY(-4px) scale(1.02);
+    background: linear-gradient(135deg, rgba(5, 150, 105, 0.9), rgba(4, 120, 87, 1));
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.6), inset 0 2px 5px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+button.btn-glow:hover::after {
+    animation: shine 1.5s ease-out infinite;
+    opacity: 1;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-150%) rotate(45deg); }
+    100% { transform: translateX(150%) rotate(45deg); }
+}
+
+button.btn-glow:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+/* --- SWITCH TEXT --- */
+.switch-text {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.switch-text span {
+    color: var(--primary);
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 5px;
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+.switch-text span:hover {
+    color: var(--secondary);
+}
+
+
+
+/* --- CUSTOM POPUP MESSAGE --- */
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    border-left: 5px solid #2e7d32;
+    text-align: center;
+    min-width: 320px;
+    font-size: 1rem;
+    animation: slideDown 0.4s ease;
+}
+
+.custom-alert.error {
+    border-left-color: #ff4444;
+}
+
+@keyframes slideDown {
+    from { top: -100px; opacity: 0; }
+    to { top: 20px; opacity: 1; }
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+    .brand-logo {
+        top: 20px;
+        right: 20px;
+        font-size: 1.2rem;
+    }
+}

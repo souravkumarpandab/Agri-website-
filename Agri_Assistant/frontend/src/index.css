@@ -1,0 +1,78 @@
+/* Import Outfit Font for a modern, attractive look */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --primary: #10B981;
+  --secondary: #34d399;
+  --accent: #F4A261;
+  --dark: #0f3d28;
+  --light: #174f36;
+  --white: #ffffff;
+  --glass-bg: rgba(30, 92, 63, 0.85);
+  --glass-border: rgba(52, 211, 153, 0.4);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--light);
+  color: var(--white);
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+/* Typography Utility */
+.section-header {
+  color: var(--primary);
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  background: linear-gradient(135deg, var(--secondary) 0%, #3B82F6 50%, var(--accent) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  margin-bottom: 12px;
+  font-weight: 700;
+  filter: drop-shadow(0 4px 10px rgba(16, 185, 129, 0.3));
+  animation: shineGradient 5s linear infinite;
+}
+
+@keyframes shineGradient {
+  to {
+    background-position: 200% center;
+  }
+}
+
+
+/* Remove default link styling */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 3D Parallax Tilt Depth */
+.react-parallax-tilt {
+  transform-style: preserve-3d;
+}
+
+.react-parallax-tilt>* {
+  transform: translateZ(40px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+}

@@ -1,0 +1,348 @@
+.govt-schemes-page {
+    background: transparent;
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.govt-schemes-page .page-header {
+    background: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-border);
+    color: var(--primary);
+    padding: 40px 16px;
+    text-align: center;
+    box-shadow: var(--glass-shadow);
+    margin-bottom: 50px;
+    padding-top: 80px;
+}
+
+.govt-schemes-page .page-header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.govt-schemes-page .subtitle {
+    margin-top: 8px;
+    font-weight: 400;
+    color: var(--white);
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.govt-schemes-page .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.govt-schemes-page .intro {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+    color: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+    margin-bottom: 40px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.tag-line {
+    color: var(--primary);
+    font-weight: 600;
+    margin-top: 15px !important;
+}
+
+.govt-schemes-page .section-title {
+    margin: 30px 0 20px;
+    font-weight: 700;
+    color: var(--secondary);
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.govt-schemes-page .schemes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+/* --- CARDS (Triggers for Popup) --- */
+.popup-trigger {
+    cursor: pointer;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    color: var(--white);
+    align-items: flex-start;
+    gap: 20px;
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.popup-trigger::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 6px; height: 100%;
+    background: var(--primary);
+    border-radius: 20px 0 0 20px;
+}
+
+.state-card.popup-trigger::before {
+    background: var(--accent);
+}
+
+.card-icon-wrapper {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--primary);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.state-icon {
+    background: rgba(244, 162, 97, 0.1);
+    color: var(--accent);
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-content h3 {
+    margin: 0 0 10px;
+    font-size: 1.15rem;
+    color: var(--secondary);
+    line-height: 1.3;
+}
+
+.brief-desc {
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.read-more-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+}
+
+.popup-trigger:hover .read-more-btn {
+    color: var(--accent);
+}
+
+.popup-trigger:hover .card-icon-wrapper i {
+    transform: scale(1.15);
+    transition: 0.3s;
+}
+
+/* --- MODAL POPUP --- */
+.scheme-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.scheme-modal-content {
+    background: var(--dark);
+    border: 1px solid var(--glass-border);
+    width: 100%;
+    max-width: 650px;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: var(--white);
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.close-modal-btn:hover {
+    background: #ff4757;
+    transform: rotate(90deg);
+}
+
+.modal-header {
+    background: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 40px 30px 30px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.modal-icon {
+    font-size: 2.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    width: 70px; height: 70px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    line-height: 1.3;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.highlight-box {
+    background: rgba(16, 185, 129, 0.05);
+    border-left: 4px solid var(--primary);
+    padding: 15px 20px;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+    color: var(--white);
+    line-height: 1.6;
+}
+
+.details-header {
+    font-size: 1.25rem;
+    margin: 0 0 15px;
+    color: var(--secondary);
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 10px;
+}
+
+.long-details {
+    color: #ddd;
+    line-height: 1.7;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+.process-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px;
+}
+
+.process-list li {
+    margin-bottom: 12px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary);
+    display: flex;
+    align-items: flex-start;
+    line-height: 1.5;
+    color: #ddd;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3);
+}
+
+.btn-primary:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--glass-border);
+    color: var(--white);
+}
+
+.btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+    .govt-schemes-page .page-header { padding: 80px 16px 20px; }
+    .govt-schemes-page .container { margin-top: 15px; }
+    .modal-header { flex-direction: column; text-align: center; }
+    .modal-actions { flex-direction: column; }
+    .btn { justify-content: center; }
+}
+
+@media(max-width: 480px) {
+    .card-icon-wrapper { width: 50px; height: 50px; font-size: 1.2rem; }
+    .card-content h3 { font-size: 1.05rem; }
+    .govt-schemes-page .section-title { font-size: 1.4rem; }
+}
