@@ -34,7 +34,7 @@ const Login = () => {
     if (!loginMobile || !loginPass) return showAlert("Please enter your mobile number and password.", 'error');
     
     try {
-      const response = await axios.post('${import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL || "http://localhost:5000"}`}/api/auth/login', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/auth/login`, {
         mobile: loginMobile,
         password: loginPass
       });
@@ -58,7 +58,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('${import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL || "http://localhost:5000"}`}/api/auth/register', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/auth/register`, {
         name: regFullName,
         mobile: regMobile,
         email: regEmail,

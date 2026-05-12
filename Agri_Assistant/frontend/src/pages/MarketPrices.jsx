@@ -98,7 +98,7 @@ const MarketPrices = () => {
     setLoadingAi(true);
     setAiAnalysis(null);
     try {
-      const response = await axios.post('${import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL || "http://localhost:5000"}`}/api/mandi-ai', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/mandi-ai`, {
         crop,
         district: `${city}, ${state}`,
         prices: {
@@ -149,23 +149,34 @@ const MarketPrices = () => {
       transition={{ duration: 0.5 }}
     >
       <BackButton />
-      <h2 style={{
-        backgroundImage: "var(--primary-gradient)",
-        color: "#fff",
-        padding: "30px 20px",
-        borderRadius: "15px",
+      <div style={{
+        background: "linear-gradient(135deg, rgba(16,185,129,0.8), rgba(5,150,105,0.9))",
+        color: "#ffffff",
+        padding: "25px 20px",
+        borderRadius: "16px",
         marginTop: "20px",
+        marginBottom: "25px",
         boxShadow: "0 10px 25px rgba(16,185,129,0.3)",
-        border: "1px solid rgba(255,255,255,0.1)"
+        border: "1px solid rgba(255,255,255,0.15)",
+        backdropFilter: "blur(10px)"
       }}>
-        <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
-           <span><i className="fas fa-satellite-dish"></i> Live e-NAM eMandi Prices</span>
-           <span style={{fontSize:'0.8rem', background:'rgba(0,0,0,0.3)', padding:'5px 12px', borderRadius:'20px'}}>
-             <i className="fas fa-circle" style={{color: '#10B981', fontSize:'0.6rem', marginRight:'5px', animation: 'pulse 1.5s infinite'}}></i> 
+        <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '15px'}}>
+           <h2 style={{
+             margin: 0, 
+             fontSize: '1.8rem', 
+             color: '#ffffff', 
+             background: 'none', 
+             WebkitTextFillColor: '#ffffff', 
+             textShadow: '0 2px 5px rgba(0,0,0,0.3)'
+           }}>
+             <i className="fas fa-satellite-dish"></i> Live eMandi Prices
+           </h2>
+           <span style={{fontSize:'0.85rem', background:'rgba(0,0,0,0.4)', padding:'6px 14px', borderRadius:'20px', fontWeight: '600', color: '#fff'}}>
+             <i className="fas fa-circle" style={{color: '#34d399', fontSize:'0.6rem', marginRight:'6px', animation: 'pulse 1.5s infinite'}}></i> 
              Connected to Govt Database
            </span>
         </div>
-      </h2>
+      </div>
 
       <div className="card">
         <div className="input-grid">

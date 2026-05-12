@@ -8,7 +8,7 @@
 
 .market-prices-page h2 {
     text-align: center;
-    color: var(--primary);
+    color: #ffffff;
     margin-bottom: 20px;
 }
 
@@ -39,7 +39,7 @@
 
 .market-prices-page .card h3 {
     margin-bottom: 15px;
-    color: var(--secondary);
+    color: #a7f3d0;
 }
 
 .market-prices-page label {
@@ -139,7 +139,7 @@
 
 .market-prices-page th {
     background: rgba(16, 185, 129, 0.15);
-    color: var(--primary);
+    color: #a7f3d0;
     font-weight: 600;
     letter-spacing: 0.5px;
 }

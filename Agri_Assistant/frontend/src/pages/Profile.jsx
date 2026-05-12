@@ -37,7 +37,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        const res = await axios.get('${import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL || "http://localhost:5000"}`}/api/auth/profile', config);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/auth/profile`, config);
         if (res.data) {
           setFormData(prev => ({
             ...prev,
@@ -153,7 +153,7 @@ const Profile = () => {
     setProgress(0);
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const res = await axios.put('${import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL || "http://localhost:5000"}`}/api/auth/profile', {
+      const res = await axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/auth/profile`, {
         name: formData.name,
         mobile: formData.mobile,
         address: formData.address,

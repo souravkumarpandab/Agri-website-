@@ -240,14 +240,14 @@ const Weather = ({ onBack }) => {
             >
               <i className="fas fa-sparkles"></i> {aiSearchMode ? "AI Active" : "AI Filter"}
             </button>
-            <button onClick={checkWeather} style={{ background: 'white', border: 'none', borderRadius: '50%', width: '40px', height: '40px', marginLeft: '5px', cursor: 'pointer' }}>
-              <i className="fas fa-search" style={{ color: 'var(--dark)', fontSize: '16px' }}></i>
+            <button onClick={checkWeather}>
+              <i className="fas fa-search"></i>
             </button>
           </div>
         </div>
 
         {loading && (
-          <div style={{ padding: '20px', color: 'var(--dark)' }}>
+          <div style={{ padding: '20px', color: '#ffffff' }}>
             <i className="fas fa-spinner fa-spin" style={{ fontSize: '2rem', marginBottom: '10px' }}></i>
             <p>Fetching weather data...</p>
           </div>
@@ -265,14 +265,14 @@ const Weather = ({ onBack }) => {
               <img src={weatherData.iconClass} alt="weather condition" style={{ width: '160px', height: '160px', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.5))', margin: '0 auto', animation: 'floatIcon 3s ease-in-out infinite' }} />
               <h1 className="temp">{weatherData.temp}°C</h1>
               <h2 className="city">{weatherData.name}</h2>
-              <p style={{ color: 'var(--dark)', fontStyle: 'italic', marginBottom: '20px', fontWeight: '500' }}>{weatherData.conditionStr}</p>
+              <p style={{ color: '#ffffff', fontStyle: 'italic', marginBottom: '20px', fontWeight: '500' }}>{weatherData.conditionStr}</p>
 
               <div className="weather-details">
                 <div className="weather-col">
                   <i className="fas fa-temperature-half weather-detail-icon" style={{color: '#ff9800'}}></i>
                   <div>
                     <p className="humidity-value">{weatherData.feelsLike}°C</p>
-                    <p style={{ color: 'var(--dark)' }}>Feels Like</p>
+                    <p style={{ color: '#ffffff' }}>Feels Like</p>
                   </div>
                 </div>
 
@@ -280,7 +280,7 @@ const Weather = ({ onBack }) => {
                   <i className="fas fa-water weather-detail-icon humidity-icon"></i>
                   <div>
                     <p className="humidity-value">{weatherData.humidity}%</p>
-                    <p style={{ color: 'var(--dark)' }}>Humidity</p>
+                    <p style={{ color: '#ffffff' }}>Humidity</p>
                   </div>
                 </div>
 
@@ -288,7 +288,7 @@ const Weather = ({ onBack }) => {
                   <i className="fas fa-wind weather-detail-icon wind-icon"></i>
                   <div>
                     <p className="wind-value">{weatherData.wind} km/h</p>
-                    <p style={{ color: 'var(--dark)' }}>Wind</p>
+                    <p style={{ color: '#ffffff' }}>Wind</p>
                   </div>
                 </div>
 
@@ -296,17 +296,17 @@ const Weather = ({ onBack }) => {
                   <i className="fas fa-cloud-rain weather-detail-icon" style={{color: '#34d399'}}></i>
                   <div>
                     <p className="wind-value">{weatherData.precipitation} mm</p>
-                    <p style={{ color: 'var(--dark)' }}>Rainfall</p>
+                    <p style={{ color: '#ffffff' }}>Rainfall</p>
                   </div>
                 </div>
               </div>
 
               {/* Farming Advice */}
               <div className="farming-advice" style={{ marginTop: '20px', padding: '15px', background: 'rgba(255,255,255,0.2)', borderRadius: '12px', borderLeft: '4px solid var(--primary)', textAlign: 'left' }}>
-                 <h4 style={{ color: 'var(--dark)', margin: 0, fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                 <h4 style={{ color: '#ffffff', margin: 0, fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
                    <i className="fas fa-leaf" style={{ color: 'var(--primary)' }}></i> Agri-Insight
                  </h4>
-                 <p style={{ color: 'var(--dark)', fontSize: '14px', marginTop: '5px', marginBottom: 0, fontWeight: '500' }}>
+                 <p style={{ color: '#ffffff', fontSize: '14px', marginTop: '5px', marginBottom: 0, fontWeight: '500' }}>
                    {weatherData.advice}
                  </p>
               </div>

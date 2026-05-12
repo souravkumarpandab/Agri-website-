@@ -48,6 +48,19 @@ const languagesList = [
   { code: 'ja', name: 'Japanese', native: '日本語' },
   { code: 'ko', name: 'Korean', native: '한국어' }
 ];
+const videoPlaylist = [
+  { id: "rzaloPUfqwg", title: "Modern Farming Techniques & High Yield Strategies" },
+  { id: "EqV-49ZsHzU", title: "Smart Irrigation & Water Management" },
+  { id: "G99coOrgGUc", title: "Organic Fertilizer Preparation Guide" },
+  { id: "RKeNBZ_vF6k", title: "Pest Management & Disease Control" },
+  { id: "_thKqJNJftQ", title: "Greenhouse Farming Masterclass" },
+  { id: "A4RM7ve5cso", title: "Expert Fertilizer Mixing & Application Methods" },
+  { id: "Qp8klo3-JSI", title: "How to Calculate Right Fertilizer Doses" },
+  { id: "-TMiMjUB_I4", title: "NPK Ratio Explained for Maximum Yield" },
+  { id: "heTxEsrPVdQ", title: "Advanced Crop Advice & Seasonal Planning" },
+  { id: "2clqFFcRjuY", title: "Soil Testing & Nutrient Management Tips" },
+  { id: "mkEsLdNKlPM", title: "Crop Rotation Secrets for Healthier Soil" }
+];
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -67,6 +80,7 @@ const Dashboard = () => {
   const [isFeaturesExpanded, setIsFeaturesExpanded] = useState(false);
   const [userCoords, setUserCoords] = useState({ lat: 28.6139, lon: 77.2090 });
   const [droneFeedIndex, setDroneFeedIndex] = useState(0);
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
   
   // Generic Modal State
   const [activeModalFeature, setActiveModalFeature] = useState(null);
@@ -141,7 +155,7 @@ const Dashboard = () => {
   const handleProfileSave = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put('${import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL || "http://localhost:5000"}`}/api/auth/profile', editProfileForm, {
+      const res = await axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/auth/profile`, editProfileForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
       updateUser(res.data);
@@ -404,7 +418,7 @@ const Dashboard = () => {
     formData.append('file', imageBlob, 'scan.png');
     setAnalysisResult({ loading: true });
     try {
-      const res = await axios.post('${import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL || "http://localhost:5000"}`}/predict', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/predict`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                  .catch(() => axios.post('https://agrisahayak-26tf.onrender.com/predict', formData));
       if (res.data.error) setAnalysisResult({ error: res.data.error });
       else setAnalysisResult({ success: true, ...res.data });
@@ -975,66 +989,55 @@ const Dashboard = () => {
 
 
                  <div style={{ display: 'flex', gap: '20px' }}>
-                     <div className="dash-card" style={{ flex: 1 }}>
-                        <h3 style={{fontSize: '1.35rem', marginBottom: '10px'}}><i className="fas fa-leaf" style={{color: '#10B981'}}></i> Soil Health Diagnostics</h3>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '8px' }}>
-                              <span style={{ fontSize: '1.15rem', color: 'var(--text-secondary)' }}>Nitrogen (N)</span>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                 <div style={{ width: '60px', height: '6px', background: '#334155', borderRadius: '3px' }}>
-                                    <div style={{ width: `${soilHealth.N}%`, height: '100%', background: soilHealth.N > 70 ? '#10B981' : soilHealth.N > 40 ? '#F59E0B' : '#EF4444', borderRadius: '3px', transition: 'width 0.5s, background 0.5s' }}></div>
-                                 </div>
-                                 <span style={{ fontSize: '1.15rem', fontWeight: 'bold' }}>{soilHealth.N}%</span>
-                              </div>
-                           </div>
-                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '8px' }}>
-                              <span style={{ fontSize: '1.15rem', color: 'var(--text-secondary)' }}>Phosphorus (P)</span>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                 <div style={{ width: '60px', height: '6px', background: '#334155', borderRadius: '3px' }}>
-                                    <div style={{ width: `${soilHealth.P}%`, height: '100%', background: soilHealth.P > 70 ? '#10B981' : soilHealth.P > 40 ? '#F59E0B' : '#EF4444', borderRadius: '3px', transition: 'width 0.5s, background 0.5s' }}></div>
-                                 </div>
-                                 <span style={{ fontSize: '1.15rem', fontWeight: 'bold' }}>{soilHealth.P}%</span>
-                              </div>
-                           </div>
-                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '8px' }}>
-                              <span style={{ fontSize: '1.15rem', color: 'var(--text-secondary)' }}>Potassium (K)</span>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                 <div style={{ width: '60px', height: '6px', background: '#334155', borderRadius: '3px' }}>
-                                    <div style={{ width: `${soilHealth.K}%`, height: '100%', background: soilHealth.K > 70 ? '#10B981' : soilHealth.K > 40 ? '#F59E0B' : '#EF4444', borderRadius: '3px', transition: 'width 0.5s, background 0.5s' }}></div>
-                                 </div>
-                                 <span style={{ fontSize: '1.15rem', fontWeight: 'bold' }}>{soilHealth.K}%</span>
-                              </div>
-                           </div>
-                           <div style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginTop: '4px', textAlign: 'center' }}>
-                              <i className="fas fa-exclamation-triangle" style={{ color: soilHealth.P < 65 ? '#EF4444' : '#10B981' }}></i> {soilHealth.P < 65 ? 'Add Phosphorus to Sector B.' : 'Soil health optimal.'}
-                           </div>
+                     <div className="dash-card" style={{ flex: 1, padding: '20px', display: 'flex', flexDirection: 'column' }}>
+                        <h3 style={{fontSize: '1.35rem', marginBottom: '15px', display: 'flex', justifyContent: 'space-between'}}>
+                           <span><i className="fas fa-play-circle" style={{color: '#EF4444'}}></i> Agri-Expert Video Tutorials</span>
+                           <span style={{ fontSize: '1.0rem', background: 'rgba(239,68,68,0.1)', color: '#EF4444', padding: '2px 8px', borderRadius: '12px', fontWeight: 'bold' }}>Playlist</span>
+                        </h3>
+                        
+                        <div style={{ flex: 1, borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', position: 'relative', marginBottom: '15px' }}>
+                           <iframe 
+                              width="100%" 
+                              height="100%" 
+                              style={{ minHeight: '220px', border: 'none' }}
+                              src={`https://www.youtube.com/embed/${videoPlaylist[activeVideoIndex].id}?autoplay=1&controls=1`}
+                              title={videoPlaylist[activeVideoIndex].title}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                              allowFullScreen>
+                           </iframe>
                         </div>
-                     </div>
 
-                     <div className="dash-card" style={{ flex: 1 }}>
-                        <h3 style={{fontSize: '1.35rem', marginBottom: '10px'}}><i className="fas fa-tractor" style={{color: '#3B82F6'}}></i> Smart Equipment</h3>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '8px' }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                 <i className="fas fa-truck-pickup" style={{ color: 'var(--text-secondary)', width: '16px' }}></i>
-                                 <span style={{ fontSize: '1.15rem', color: 'var(--text-primary)' }}>Harvester 1</span>
+                        <div style={{ fontSize: '1.15rem', color: '#ffffff', fontWeight: 'bold', marginBottom: '10px' }}>
+                           {videoPlaylist[activeVideoIndex].title}
+                        </div>
+
+                        <div className="custom-scrollbar" style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '10px' }}>
+                           {videoPlaylist.map((video, idx) => (
+                              <div 
+                                 key={video.id} 
+                                 onClick={() => setActiveVideoIndex(idx)}
+                                 style={{ 
+                                    minWidth: '140px', 
+                                    cursor: 'pointer', 
+                                    opacity: activeVideoIndex === idx ? 1 : 0.6,
+                                    border: activeVideoIndex === idx ? '2px solid #10B981' : '2px solid transparent',
+                                    borderRadius: '8px',
+                                    transition: '0.3s',
+                                    background: 'rgba(255,255,255,0.05)',
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                 }}
+                              >
+                                 <div style={{ width: '100%', height: '80px', background: `url(https://img.youtube.com/vi/${video.id}/mqdefault.jpg) center/cover`, borderTopLeftRadius: '6px', borderTopRightRadius: '6px', position: 'relative' }}>
+                                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                       <i className="fas fa-play" style={{ color: 'white', fontSize: '1.5rem', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}></i>
+                                    </div>
+                                 </div>
+                                 <div style={{ padding: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                    {video.title}
+                                 </div>
                               </div>
-                              <span style={{ fontSize: '1.05rem', background: equipmentStatus.harvester === 'ACTIVE' ? 'rgba(16,185,129,0.1)' : equipmentStatus.harvester === 'OFFLINE' ? 'rgba(239,68,68,0.1)' : 'rgba(245,158,11,0.1)', color: equipmentStatus.harvester === 'ACTIVE' ? '#10B981' : equipmentStatus.harvester === 'OFFLINE' ? '#EF4444' : '#F59E0B', padding: '2px 8px', borderRadius: '12px', fontWeight: 'bold' }}>{equipmentStatus.harvester}</span>
-                           </div>
-                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '8px' }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                 <i className="fas fa-water" style={{ color: 'var(--text-secondary)', width: '16px' }}></i>
-                                 <span style={{ fontSize: '1.15rem', color: 'var(--text-primary)' }}>Pump Station A</span>
-                              </div>
-                              <span style={{ fontSize: '1.05rem', background: equipmentStatus.pump === 'ACTIVE' ? 'rgba(16,185,129,0.1)' : equipmentStatus.pump === 'OFFLINE' ? 'rgba(239,68,68,0.1)' : 'rgba(245,158,11,0.1)', color: equipmentStatus.pump === 'ACTIVE' ? '#10B981' : equipmentStatus.pump === 'OFFLINE' ? '#EF4444' : '#F59E0B', padding: '2px 8px', borderRadius: '12px', fontWeight: 'bold' }}>{equipmentStatus.pump}</span>
-                           </div>
-                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '8px' }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                 <i className="fas fa-fan" style={{ color: 'var(--text-secondary)', width: '16px' }}></i>
-                                 <span style={{ fontSize: '1.15rem', color: 'var(--text-primary)' }}>Silo Fan 3</span>
-                              </div>
-                              <span style={{ fontSize: '1.05rem', background: equipmentStatus.fan === 'ACTIVE' ? 'rgba(16,185,129,0.1)' : equipmentStatus.fan === 'OFFLINE' ? 'rgba(239,68,68,0.1)' : 'rgba(245,158,11,0.1)', color: equipmentStatus.fan === 'ACTIVE' ? '#10B981' : equipmentStatus.fan === 'OFFLINE' ? '#EF4444' : '#F59E0B', padding: '2px 8px', borderRadius: '12px', fontWeight: 'bold' }}>{equipmentStatus.fan}</span>
-                           </div>
+                           ))}
                         </div>
                      </div>
                  </div>

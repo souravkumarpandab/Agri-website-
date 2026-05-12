@@ -38,7 +38,7 @@ const CropRecommendation = () => {
     setRecommendedCrop(null);
 
     try {
-      const response = await axios.post('${import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL || "http://localhost:5000"}`}/api/recommend-crop', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/recommend-crop`, {
         N: parseFloat(nitrogen),
         P: parseFloat(phosphorus),
         K: parseFloat(potassium),

@@ -251,7 +251,7 @@ def generate_bot_response(user_msg):
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 if HAS_GENAI and GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
-    gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+    gemini_model = genai.GenerativeModel('gemini-2.5-flash')
 else:
     gemini_model = None
 

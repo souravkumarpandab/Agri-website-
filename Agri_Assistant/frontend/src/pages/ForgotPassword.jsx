@@ -19,7 +19,7 @@ const ForgotPassword = () => {
   const handleRequestOTP = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('${import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL || "http://localhost:5000"}`}/api/auth/forgot-password', { email });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/auth/forgot-password`, { email });
       showAlert(response.data.message || "OTP sent successfully!", 'success');
       setOtpSent(true);
     } catch (error) {
@@ -31,7 +31,7 @@ const ForgotPassword = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('${import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL || "http://localhost:5000"}`}/api/auth/reset-password', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/auth/reset-password`, {
         email, otp, newPassword
       });
       showAlert(response.data.message || "Password Reset Successful!", 'success');
